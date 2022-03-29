@@ -95,15 +95,17 @@ def createRecord(info,token,database_id, url):
     else:
         print(re.text)
 
-if __name__ == "__main__":
-
-    token = 'secret_vWQy6ZyL5ao8V1P9FsvHEXhu4Wi8LziQFHNVFXEDrFY'
-    database_id = "156f7826cf084cc7bc7ba066279a74b6" 
+def main():
+    token = ' ' # 在这里填写token
+    database_id = ' ' # 在这里填写database_id
     argparser = ArgumentParser(description='Notion-doubanBook')
     argparser.add_argument("--url", "-u", help="豆瓣读书链接")
     argparser.add_argument("--tag", "-t", help="自定义标签，默认为空")
     argparser.add_argument("--status", "-s", help="阅读状态（未读，在读，读完），默认为未读")
     arg = argparser.parse_args()
+    if token == ' ' or database_id == ' ':
+        print("请在代码中的填写token和database_id")
+        return 0
     if arg.url is None :
         print("请输入豆瓣读书链接")
         print("E.g. doubanBook.py -u 'https://book.douban.com/subject/10491608/'")
@@ -112,3 +114,7 @@ if __name__ == "__main__":
         info['tag'] = arg.tag if arg.tag is not None else ' '
         info['status'] = arg.status if arg.status is not None else '未读'
         createRecord(info=info,token=token,database_id=database_id,url=arg.url)
+
+if __name__ == "__main__":
+
+    main()
